@@ -14,12 +14,11 @@ public class Enemy {
     public int attack;
     public boolean dead;
 
-    /**
-     * コンストラクタ。名前、最大HP、攻撃力を指定する。
-     * @param name モンスター名
-     * @param maximumHP モンスターのHP
-     * @param attack モンスターの攻撃力
-     */
+
+    // private String name;
+    // private int hitPoint;
+    // private int attack;
+    // private boolean dead;
     public Enemy (String name, int maximumHP, int attack) {
         this.name = name;
         hitPoint = maximumHP;
@@ -28,6 +27,39 @@ public class Enemy {
         System.out.printf("%sのHPは%d。攻撃力は%dです。\n", name, maximumHP, attack);
     }
 
+
+    /**
+     * コンストラクタ。名前、最大HP、攻撃力を指定する。
+     * @param name モンスター名
+     * @param maximumHP モンスターのHP
+     * @param attack モンスターの攻撃力
+     */
+    // public Enemy (String _name, int _maximumHP, int _attack) {
+    //     this.setName(_name);
+    //     this.setHitpoint(_maximumHP);
+    //     this.setAttack(_attack);
+    //     this.setDead(this.dead);
+    //     System.out.printf("%sのHPは%d。攻撃力は%dです。\n", _name, _maximumHP, _attack);
+    // }
+    // public void setName(String _name){ this.name = _name; }
+    // public void setHitpoint(int _hitpoint){ this.hitPoint = _hitpoint; }
+    // public void setAttack(int _attack){ this.attack = _attack; }
+    // public void setDead(boolean _dead){ this.dead = _dead; }
+    
+
+    // public String getName(){
+    //     return this.name;
+    // }
+    // public int getHitpoint(){
+    //     return this.hitPoint;
+    // }
+    // public int getAttack(){
+    //     return this.attack;
+    // }
+    // public boolean getDead(){
+    //     return this.dead;
+    // }
+
     /**
      * Heroへ攻撃するメソッド。
      * attackに応じて乱数でダメージを算出し、hero.wounded()によりダメージ処理を実行。
@@ -35,8 +67,11 @@ public class Enemy {
      */
     public void attack(Hero hero){
         int damage = (int)(Math.random() * attack);
-        System.out.printf("%sの攻撃！%sに%dのダメージを与えた！！\n", name, hero.name, damage);
+        if (hitPoint > 0){
+            System.out.printf("%sの攻撃！%sに%dのダメージを与えた！！\n", name, hero.name, damage);
         hero.wounded(damage);
+        }
+        
     }
 
     /**
