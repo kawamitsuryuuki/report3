@@ -8,13 +8,10 @@ package jp.ac.uryukyu.ie.e235746;
  *  boolean dead; //敵の生死状態。true=死亡。
  * Created by tnal on 2016/11/13.
  */
-public class Enemy {
+public class Enemy extends LivingThing {
     
 
-    private String name;
-    private int hitPoint;
-    private int attack;
-    private boolean dead;
+    
     
 
 
@@ -25,54 +22,30 @@ public class Enemy {
      * @param attack モンスターの攻撃力
      */
     public Enemy (String _name, int _maximumHP, int _attack) {
-        this.setName(_name);
-        this.setHitpoint(_maximumHP);
-        this.setAttack(_attack);
-        this.setDead(this.dead);
+        super(_name,_maximumHP,_attack);
         System.out.printf("%sのHPは%d。攻撃力は%dです。\n", _name, _maximumHP, _attack);
     }
-    public void setName(String _name){ this.name = _name; }
-    public void setHitpoint(int _hitpoint){ this.hitPoint = _hitpoint; }
-    public void setAttack(int _attack){ this.attack = _attack; }
-    public void setDead(boolean _dead){ this.dead = _dead; }
-    
+   
 
-    public String getName(){
-        return this.name;
-    }
-    public int getHitpoint(){
-        return this.hitPoint;
-    }
-    public int getAttack(){
-        return this.attack;
-    }
-    public boolean getDead(){
-        return this.dead;
-    }
 
     /**
      * Heroへ攻撃するメソッド。
      * attackに応じて乱数でダメージを算出し、hero.wounded()によりダメージ処理を実行。
      * @param hero 攻撃対象
      */
-    public void attack(Hero hero){
-        if (hitPoint > 0){
-        int damage = (int)(Math.random() * attack);
-        System.out.printf("%sの攻撃！%sに%dのダメージを与えた！！\n", name, hero.getName(), damage);
-        hero.wounded(damage);  
-        }  
-    }
+    
 
     /**
      * 自身へ攻撃されたときのダメージ処理をするメソッド。
      * 指定されたダメージを hitPoint から引き、死亡判定を行う。
      * @param damage 受けたダメージ
      */
+    @Override
     public void wounded(int damage){
-        hitPoint -= damage;
-        if( hitPoint < 0 ) {
-            dead = true;
-            System.out.printf("モンスター%sは倒れた。\n", name);
+        super.sethitPoint(super.getHitPoint() - damage);
+        if( super.getHitPoint() < 0 ) {
+            super.setdead(true);
+            System.out.printf("モンスター%sは倒れた。\n", super.getName());
         }
     }
 
